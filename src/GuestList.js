@@ -5,20 +5,17 @@ const GuestList = (props) => {
   return (
     <ul>
       {
-        props.guests.map(guest => (
-          <li>
+        props.guests.map((guest, index) => (
+          <li key={index}>
             <span>{ guest.name }</span>
+            <label>
+              <input type="checkbox" checked={guest.isConfirmed} /> Confirmed
+            </label>
+            <button>edit</button>
+            <button>remove</button>
           </li>
         ))
       }
-      <li>
-        <span>Joel</span>
-        <label>
-          <input type="checkbox" /> Confirmed
-        </label>
-        <button>edit</button>
-        <button>remove</button>
-      </li>
     </ul>
   )
 };
