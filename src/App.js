@@ -21,16 +21,17 @@ class App extends Component {
   };
 
   toggleConfirmationAt = (indexToChange) => {
-    this.setState((prevState) => {
-      const updatedGuests = [...prevState.guests];
-      const updatedGuest = {...updatedGuests[indexToChange]};
-      updatedGuest.isConfirmed = !updatedGuest.isConfirmed;
-      updatedGuests[indexToChange] = updatedGuest;
-
-      return {
-        guests: updatedGuests
-      };
-    });
+    this.setState((prevState) => ({
+      guests: prevState.guests.map((guest, index) => {
+        if (index === indexToChange) {
+          return {
+            ...guest,
+            isConfirmed: !guest.isConfirmed
+          };
+        }
+        return guest;
+      })
+    }));
   }
 
   getTotalInvited = () => {
