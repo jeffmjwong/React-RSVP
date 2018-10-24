@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Guest = ({ index, name, isConfirmed, handleConfirmation }) => {
+const Guest = (props) => {
   return (
     <li>
-      <span>{ name }</span>
+      <span>{ props.name }</span>
       <label>
         <input
           type="checkbox"
-          checked={isConfirmed}
-          onChange={handleConfirmation}
+          checked={props.isConfirmed}
+          onChange={props.handleConfirmation}
         /> Confirmed
       </label>
-      <button>edit</button>
+      <button onClick={props.handleToggleEditing}>edit</button>
       <button>remove</button>
     </li>
   );
@@ -21,7 +21,9 @@ const Guest = ({ index, name, isConfirmed, handleConfirmation }) => {
 Guest.propTypes = {
   name: PropTypes.string.isRequired,
   isConfirmed: PropTypes.bool.isRequired,
-  handleConfirmation: PropTypes.func.isRequired
+  isEditing: PropTypes.bool.isRequired,
+  handleConfirmation: PropTypes.func.isRequired,
+  handleToggleEditing: PropTypes.func.isRequired
 };
 
 export default Guest;
