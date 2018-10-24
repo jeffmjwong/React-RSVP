@@ -6,7 +6,12 @@ import GuestName from './GuestName';
 const Guest = (props) => {
   return (
     <li>
-      <GuestName isEditing={props.isEditing}>{ props.name }</GuestName>
+      <GuestName
+        isEditing={props.isEditing}
+        handleNameEdits={(evt) => props.setName(evt.target.value)}
+      >
+        { props.name }
+      </GuestName>
       <label>
         <input
           type="checkbox"
@@ -14,7 +19,9 @@ const Guest = (props) => {
           onChange={props.handleConfirmation}
         /> Confirmed
       </label>
-      <button onClick={props.handleToggleEditing}>edit</button>
+      <button onClick={props.handleToggleEditing}>
+        { props.isEditing ? 'Save' : 'Edit' }
+      </button>
       <button>remove</button>
     </li>
   );
@@ -25,7 +32,8 @@ Guest.propTypes = {
   isConfirmed: PropTypes.bool.isRequired,
   isEditing: PropTypes.bool.isRequired,
   handleConfirmation: PropTypes.func.isRequired,
-  handleToggleEditing: PropTypes.func.isRequired
+  handleToggleEditing: PropTypes.func.isRequired,
+  setName: PropTypes.func.isRequired
 };
 
 export default Guest;
