@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import GuestName from './GuestName';
+
 const Guest = (props) => {
   return (
     <li>
-      <span>{ props.name }</span>
+      <GuestName isEditing={props.isEditing}>{ props.name }</GuestName>
       <label>
         <input
           type="checkbox"
