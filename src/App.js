@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
+
 import GuestList from './GuestList';
+import Counter from './Counter';
 
 class App extends Component {
   state = {
@@ -127,22 +129,9 @@ class App extends Component {
             </label>
           </div>
 
-          <table className="counter">
-            <tbody>
-              <tr>
-                <td>Attending:</td>
-                <td>2</td>
-              </tr>
-              <tr>
-                <td>Unconfirmed:</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>Total:</td>
-                <td>3</td>
-              </tr>
-            </tbody>
-          </table>
+          <Counter
+            totalInvited={this.getTotalInvited()}
+          />
 
           <GuestList
             guests={guests}
@@ -151,6 +140,7 @@ class App extends Component {
             setNameAt={this.setNameAt}
             isFiltered={isFiltered}
             removeGuestAt={this.removeGuestAt}
+            pendingGuest={pendingGuest}
           />
         </div>
       </div>
