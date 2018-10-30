@@ -96,7 +96,17 @@ class App extends Component {
     return guests.length;
   }
 
-  // getAttendingGuests and getUnconfirmedGuests
+  getAttendingGuests = () => {
+    const { guests } = this.state;
+
+    return guests.reduce((total, guest) => {
+      return guest.isConfirmed ? total + 1 : total;
+    }, 0)
+  }
+
+  getUnconfirmedGuests = () => {
+    return this.getTotalInvited() - this.getAttendingGuests();
+  }
 
   render() {
     const { isFiltered, pendingGuest, guests } = this.state;
@@ -131,6 +141,8 @@ class App extends Component {
 
           <Counter
             totalInvited={this.getTotalInvited()}
+            numberAttending={this.getAttendingGuests()}
+            numberUnconfirmed={this.getUnconfirmedGuests()}
           />
 
           <GuestList
