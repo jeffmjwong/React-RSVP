@@ -18,6 +18,7 @@ const GuestList = (props) => {
               handleConfirmation={() => props.toggleConfirmationAt(index)}
               handleToggleEditing={() => props.toggleEditingAt(index)}
               setName={(text) => props.setNameAt(index, text)}
+              handleRemove={() => props.removeGuestAt(index)}
             />
           ))
       }
@@ -30,7 +31,8 @@ GuestList.propTypes = {
   toggleConfirmationAt: PropTypes.func.isRequired,
   toggleEditingAt: PropTypes.func.isRequired,
   setNameAt: PropTypes.func.isRequired,
-  isFiltered: PropTypes.bool.isRequired
+  isFiltered: PropTypes.bool.isRequired,
+  removeGuestAt: PropTypes.func.isRequired
 };
 
 export default GuestList;
