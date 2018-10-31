@@ -3,6 +3,7 @@ import './App.css';
 
 import GuestList from './GuestList';
 import Counter from './Counter';
+import Header from './Header';
 
 class App extends Component {
   state = {
@@ -113,19 +114,11 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header>
-          <h1>RSVP</h1>
-          <p>A Treehouse App</p>
-          <form onSubmit={this.newGuestSubmitHandler}>
-              <input
-                type="text"
-                value={pendingGuest}
-                placeholder="Invite Someone"
-                onChange={this.handleNameInput}
-              />
-              <button type="submit" name="submit" value="submit">Submit</button>
-          </form>
-        </header>
+        <Header
+          pendingGuest={pendingGuest}
+          newGuestSubmitHandler={this.newGuestSubmitHandler}
+          handleNameInput={this.handleNameInput}
+        />
 
         <div className="main">
           <div>
