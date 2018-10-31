@@ -10,29 +10,13 @@ class App extends Component {
   state = {
     isFiltered: false,
     pendingGuest: '',
-    guests: [
-      {
-        name: 'Treasure',
-        isConfirmed: false,
-        isEditing: false
-      },
-      {
-        name: 'Nic',
-        isConfirmed: true,
-        isEditing: false
-      },
-      {
-        name: 'Matt K',
-        isConfirmed: false,
-        isEditing: false
-      }
-    ]
+    guests: []
   };
 
-  toggleGuestPropertyAt = (indexToChange, property) => {
+  toggleGuestPropertyAt = (guestId, property) => {
     this.setState((prevState) => ({
-      guests: prevState.guests.map((guest, index) => {
-        if (index === indexToChange) {
+      guests: prevState.guests.map((guest) => {
+        if (guest.id === guestId) {
           return {
             ...guest,
             [property]: !guest[property]
@@ -43,24 +27,24 @@ class App extends Component {
     }));
   }
 
-  toggleConfirmationAt = (indexToChange) => {
-    this.toggleGuestPropertyAt(indexToChange, 'isConfirmed');
+  toggleConfirmationAt = (guestId) => {
+    this.toggleGuestPropertyAt(guestId, 'isConfirmed');
   }
 
-  removeGuestAt = (indexToRemove) => {
+  removeGuestAt = (guestId) => {
     this.setState((prevState) => ({
-      guests: prevState.guests.filter((guest, index) => index !== indexToRemove)
+      guests: prevState.guests.filter((guest) => guest.id !== guestId)
     }));
   }
 
-  toggleEditingAt = (indexToChange) => {
-    this.toggleGuestPropertyAt(indexToChange, 'isEditing');
+  toggleEditingAt = (guestId) => {
+    this.toggleGuestPropertyAt(guestId, 'isEditing');
   }
 
-  setNameAt = (indexToChange, name) => {
+  setNameAt = (guestId, name) => {
     this.setState((prevState) => ({
-      guests: prevState.guests.map((guest, index) => {
-        if (index === indexToChange) {
+      guests: prevState.guests.map((guest) => {
+        if (guest.id === guestId) {
           return {
             ...guest,
             name
@@ -87,7 +71,10 @@ class App extends Component {
     const { pendingGuest } = this.state;
 
     this.setState((prevState) => ({
-      guests: [{ name: pendingGuest, isConfirmed: false, isEditing: false }, ...prevState.guests],
+      guests: [
+        { id: new Date().getTime(), name: pendingGuest, isConfirmed: false, isEditing: false },
+        ...prevState.guests
+      ],
       pendingGuest: ''
     }));
   }
